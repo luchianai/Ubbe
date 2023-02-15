@@ -1,0 +1,122 @@
+# Copyright 2024 Clivern
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+---
+- name: Download grafana
+  get_url:
+    url: https://dl.grafana.com/enterprise/release/grafana-enterprise-{{ grafana_version }}.linux-amd64.tar.gz
+    dest: /tmp/grafana.tar.gz
+    mode: 0755
+    checksum: sha256:{{ grafana_version_checksum }}
+  tags: [ husky, grafana ]
+
+- name: Install grafana
+  unarchive:
+    src: /tmp/grafana.tar.gz
+    dest: /tmp
+    remote_src: yes
+  tags: [ husky, grafana ]
+
+- name: Copy grafana file to bin
+  copy:
+    src: /tmp/grafana-{{ grafana_version }}/bin/grafana-server
+    dest: /usr/local/bin/grafana-server
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    remote_src: yes
+    mode: 0755
+  tags: [ husky, grafana ]
+
+- name: Delete grafana tar file
+  file:
+    path: /tmp/grafana.tar.gz
+    state: absent
+  tags: [ husky, grafana ]
+
+- name: Create grafana directory
+  file:
+    path: /etc/grafana
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: 0755
+  tags: [ husky, grafana ]
+
+- name: Create grafana data directory
+  file:
+    path: /etc/grafana/data
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: 0755
+  tags: [ husky, grafana ]
+
+- name: Create grafana dist directory
+  file:
+    path: /etc/grafana/dist
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: 0755
+  tags: [ husky, grafana ]
+
+- name: Create grafana log directory
+  file:
+    path: /etc/grafana/log
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: 0755
+  tags: [ husky, grafana ]
+
+- name: Create grafana plugins directory
+  file:
+    path: /etc/grafana/plugins
+    state: directory
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: 0755
+  tags: [ husky, grafana ]
+
+- name: Copy grafana to dist directory
+  copy:
+    src: /tmp/grafana-{{ grafana_version }}
+    dest: /etc/grafana/dist
+    remote_src: true
+    owner: "{{ system_user }}"
+    group: "{{ system_group }}"
+    mode: 0755
+  become: yes
+  tags: [ husky, grafana ]
+
+- name: Create grafana config file
+  template:
+    src: defaults.ini.j2
+    dest: /etc/grafana/dist/grafana-{{ grafana_version }}/conf/defaults.ini
+  notify: restart grafana
+  tags: [ husky, grafana ]
+
+- name: Copy grafana systemd file
+  template:
+    src: grafana.service.j2
+    dest: /etc/systemd/system/grafana.service
+  notify: reload systemd
+  tags: [ husky, grafana ]
+
+- name: Start grafana service
+  service:
+    name: grafana
+    state: started
+    enabled: yes
+  tags: [ husky, grafana ]

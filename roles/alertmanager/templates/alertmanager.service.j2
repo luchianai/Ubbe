@@ -1,0 +1,18 @@
+[Unit]
+Description=Prometheus Server
+After=network.target
+
+[Service]
+User={{ system_user }}
+Group={{ system_group }}
+Type=simple
+RestartSec=5s
+Restart=on-failure
+ExecStart=/usr/local/bin/alertmanager \
+  --config.file=/etc/alertmanager/alertmanager.yml \
+  --storage.path=/etc/alertmanager/data \
+  --web.external-url=http://localhost:9093 \
+  --web.route-prefix=/
+
+[Install]
+WantedBy=multi-user.target
