@@ -24,7 +24,7 @@ groups:
       summary: "{% raw %}Instance {{ $labels.instance }} down{% endraw %}"
       description: "{% raw %}{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 1 minute.{% endraw %}"
 
-  - alert: HighCPUUsage
+  - alert: High CPU Usage
     expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
     for: 5m
     labels:
@@ -33,7 +33,7 @@ groups:
       summary: "{% raw %}High CPU usage on {{ $labels.instance }}{% endraw %}"
       description: "{% raw %}CPU usage is above 80% for 5 minutes{% endraw %}"
 
-  - alert: HighMemoryUsage
+  - alert: High Memory Usage
     expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
     for: 5m
     labels:
@@ -42,7 +42,7 @@ groups:
       summary: "{% raw %}High memory usage on {{ $labels.instance }}{% endraw %}"
       description: "{% raw %}Memory usage is above 85% for 5 minutes{% endraw %}"
 
-  - alert: DiskSpaceFilling
+  - alert: Disk Space Filling
     expr: (node_filesystem_size_bytes - node_filesystem_free_bytes) / node_filesystem_size_bytes * 100 > 80
     for: 5m
     labels:
