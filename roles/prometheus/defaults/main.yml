@@ -25,3 +25,6 @@ prometheus_remote_write_urls:
   - url: "http://localhost:9090/api/v1/write"
     username: "admin"
     password: "admin"
+
+# Prometheus feature flags (can be overridden by group vars)
+prometheus_enable_remote_write_receiver: true

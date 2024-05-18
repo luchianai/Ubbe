@@ -30,7 +30,10 @@
     prometheus_remote_write_urls:
       - url: "http://localhost:9090/api/v1/write"
         username: "admin"
-        password: "admin"
+        password: "password"
+
+    # Prometheus feature flags
+    prometheus_enable_remote_write_receiver: true
 
     # PagerDuty configuration
     service_name: "luchian"
@@ -41,9 +44,9 @@
     http_basic_auth_password: "password"
 
     # Authentication settings for each service
-    enable_prometheus_auth: false
-    enable_alertmanager_auth: false
-    enable_node_exporter_auth: false
+    enable_prometheus_auth: true
+    enable_alertmanager_auth: true
+    enable_node_exporter_auth: true
 
     # Domain configuration
     monitoring_domain: "monitoring.luchian.io"
@@ -51,19 +54,6 @@
     prometheus_hostname: "prometheus"
     alertmanager_hostname: "alertmanager"
     node_exporter_hostname: "node-exporter"
-
-    # Nginx logrotate configuration
-    nginx_logrotate_scripts:
-      - name: nginx
-        path: /var/log/nginx/*.log
-        rotate: 7
-        size: 100M
-        compress: true
-        delaycompress: true
-        missingok: true
-        notifempty: true
-        create: 644 www-data adm
-        postrotate: "invoke-rc.d nginx rotate >/dev/null 2>&1"
 
   pre_tasks:
     - name: Update apt cache

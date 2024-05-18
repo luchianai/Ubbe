@@ -10,7 +10,8 @@ RestartSec=5s
 Restart=on-failure
 ExecStart=/usr/local/bin/prometheus \
   --config.file=/etc/prometheus/prometheus.yml \
-  --storage.tsdb.path=/etc/prometheus/data
+  --storage.tsdb.path=/etc/prometheus/data \
+  --enable-feature=remote-write-receiver
 
 [Install]
 WantedBy=multi-user.target
