@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ---
-hostname: monitoring.ropen.sh
+hostname: monitoring.luchian.io
 
 http_basic_auth_username: admin
 http_basic_auth_password: admin

@@ -17,5 +17,5 @@ enable_fw: yes
 upgrade_pkgs: yes
 update_pkgs: yes
 
-system_user: husky
-system_group: husky
+system_user: ubbe
+system_group: ubbe

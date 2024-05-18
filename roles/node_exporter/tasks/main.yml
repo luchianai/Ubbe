@@ -19,14 +19,14 @@
     dest: /tmp/node_exporter.tar.gz
     mode: 0755
     checksum: sha256:{{ node_exporter_version_checksum }}
-  tags: [ husky, node_exporter ]
+  tags: [ ubbe, node_exporter ]
 
 - name: Uncompress the node_exporter /tmp/node_exporter.tar.gz
   unarchive:
     src: /tmp/node_exporter.tar.gz
     dest: /tmp
     remote_src: yes
-  tags: [ husky, node_exporter ]
+  tags: [ ubbe, node_exporter ]
 
 - name: Copy node_exporter file to /usr/local/bin
   copy:
@@ -36,37 +36,37 @@
     group: "{{ system_group }}"
     remote_src: yes
     mode: 0755
-  tags: [ husky, node_exporter ]
+  tags: [ ubbe, node_exporter ]
 
 - name: Delete node_exporter tmp folder
   file:
     path: /tmp/node_exporter-{{ node_exporter_version }}.linux-amd64
     state: absent
-  tags: [ husky, node_exporter ]
+  tags: [ ubbe, node_exporter ]
 
 - name: Delete node_exporter tar.gz file
   file:
     path: /tmp/node_exporter.tar.gz
     state: absent
-  tags: [ husky, node_exporter ]
+  tags: [ ubbe, node_exporter ]
 
 - name: Copy node_exporter systemd file
   template:
     src: node_exporter.service.j2
     dest: /etc/systemd/system/node_exporter.service
   notify: reload node_exporter
-  tags: [ husky, node_exporter ]
+  tags: [ ubbe, node_exporter ]
 
 - name: Start node_exporter service
   service:
     name: node_exporter
     state: started
     enabled: yes
-  tags: [ husky, node_exporter ]
+  tags: [ ubbe, node_exporter ]
 
 - name: Check if node_exporter is accessible
   uri:
     url: http://localhost:9100
     method: GET
     status_code: 200
-  tags: [ husky, node_exporter ]
+  tags: [ ubbe, node_exporter ]

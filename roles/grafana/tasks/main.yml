@@ -19,14 +19,14 @@
     dest: /tmp/grafana.tar.gz
     mode: 0755
     checksum: sha256:{{ grafana_version_checksum }}
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Install grafana
   unarchive:
     src: /tmp/grafana.tar.gz
     dest: /tmp
     remote_src: yes
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Copy grafana file to bin
   copy:
@@ -36,13 +36,13 @@
     group: "{{ system_group }}"
     remote_src: yes
     mode: 0755
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Delete grafana tar file
   file:
     path: /tmp/grafana.tar.gz
     state: absent
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Create grafana directory
   file:
@@ -51,7 +51,7 @@
     owner: "{{ system_user }}"
     group: "{{ system_group }}"
     mode: 0755
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Create grafana data directory
   file:
@@ -60,7 +60,7 @@
     owner: "{{ system_user }}"
     group: "{{ system_group }}"
     mode: 0755
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Create grafana dist directory
   file:
@@ -69,7 +69,7 @@
     owner: "{{ system_user }}"
     group: "{{ system_group }}"
     mode: 0755
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Create grafana log directory
   file:
@@ -78,7 +78,7 @@
     owner: "{{ system_user }}"
     group: "{{ system_group }}"
     mode: 0755
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Create grafana plugins directory
   file:
@@ -87,7 +87,7 @@
     owner: "{{ system_user }}"
     group: "{{ system_group }}"
     mode: 0755
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Copy grafana to dist directory
   copy:
@@ -98,25 +98,25 @@
     group: "{{ system_group }}"
     mode: 0755
   become: yes
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Create grafana config file
   template:
     src: defaults.ini.j2
     dest: /etc/grafana/dist/grafana-{{ grafana_version }}/conf/defaults.ini
   notify: restart grafana
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Copy grafana systemd file
   template:
     src: grafana.service.j2
     dest: /etc/systemd/system/grafana.service
   notify: reload systemd
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]
 
 - name: Start grafana service
   service:
     name: grafana
     state: started
     enabled: yes
-  tags: [ husky, grafana ]
+  tags: [ ubbe, grafana ]

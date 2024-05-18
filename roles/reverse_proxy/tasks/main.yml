@@ -21,12 +21,12 @@
       - apache2-utils
       - python3-pip
     state: present
-  tags: [ husky, reverse_proxy ]
+  tags: [ ubbe, reverse_proxy ]
 
 - name: Install passlib python package
   pip:
     name: passlib
-  tags: [ husky, reverse_proxy ]
+  tags: [ ubbe, reverse_proxy ]
 
 - name: Create the nginx configuration file
   template:
@@ -35,14 +35,14 @@
     backup: yes
     mode: '0644'
   notify: reload nginx
-  tags: [ husky, reverse_proxy ]
+  tags: [ ubbe, reverse_proxy ]
 
 - name: Ensure that the default site is disabled
   file:
     path: /etc/nginx/sites-enabled/default
     state: absent
   notify: reload nginx
-  tags: [ husky, reverse_proxy ]
+  tags: [ ubbe, reverse_proxy ]
 
 - name: Enable basic authentication
   htpasswd:
@@ -53,22 +53,22 @@
     group: www-data
     mode: 0640
   notify: restart nginx
-  tags: [ husky, reverse_proxy ]
+  tags: [ ubbe, reverse_proxy ]
 
 - name: Ensure that husky site is enabled
   file:
-    src: /etc/nginx/sites-available/husky.sh
-    dest: /etc/nginx/sites-enabled/husky.sh
+    src: /etc/nginx/sites-available/monitoring.luchian.io
+    dest: /etc/nginx/sites-enabled/monitoring.luchian.io
     state: link
   notify: reload nginx
-  tags: [ husky, reverse_proxy ]
+  tags: [ ubbe, reverse_proxy ]
 
 - name: Ensure nginx service is started
   service:
     name: nginx
     state: started
     enabled: yes
-  tags: [ husky, reverse_proxy ]
+  tags: [ ubbe, reverse_proxy ]
 
 - name: Setup logrotate scripts
   template:
@@ -77,7 +77,7 @@
     mode: "0644"
   with_items: "{{ nginx_logrotate_scripts }}"
   when: nginx_logrotate_scripts is defined
-  tags: [ husky, reverse_proxy ]
+  tags: [ ubbe, reverse_proxy ]
 
 - name: Block access prometheus, alertmanager, node_exporter ... etc except from localhost
   shell: |
@@ -95,4 +95,4 @@
 
     iptables-save > /etc/iptables/rules.v4
   become: yes
-  tags: [ husky, reverse_proxy ]
+  tags: [ ubbe, reverse_proxy ]

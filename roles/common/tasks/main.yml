@@ -17,7 +17,7 @@
   apt:
     update_cache: yes
   when: update_pkgs | bool
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Upgrade packages
   become: true
@@ -26,13 +26,13 @@
     update_cache: yes
     cache_valid_time: 86400
   when: upgrade_pkgs | bool
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Remove dependencies that are no longer required
   apt:
     autoremove: yes
   when: upgrade_pkgs | bool
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Create the system username
   user:
@@ -41,41 +41,41 @@
     system: yes
     shell: /sbin/nologin
     createhome: "no"
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Create the system group
   group:
     name: "{{ system_group }}"
     system: yes
     state: present
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Add the system user to the system group
   user:
     name: "{{ system_user }}"
     group: "{{ system_group }}"
     state: present
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Install basic package
   apt:
     pkg: ufw
     state: present
     update_cache: true
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Install logrotate
   package:
     name: logrotate
     state: present
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Install unzip package
   apt:
     pkg: unzip
     state: present
     update_cache: true
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Disallow password authentication
   lineinfile:
@@ -84,21 +84,21 @@
     line: "PasswordAuthentication no"
     state: present
   notify: restart sshd
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Activate firewall
   ufw:
     state: enabled
     policy: deny
   when: enable_fw
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Firewall allow SSH
   ufw:
     rule: allow
     name: OpenSSH
   when: enable_fw
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Firewall allow HTTP
   ufw:
@@ -106,7 +106,7 @@
     port: '80'
     proto: tcp
   when: enable_fw
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Firewall allow HTTPs
   ufw:
@@ -114,11 +114,11 @@
     port: '443'
     proto: tcp
   when: enable_fw
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
 
 - name: Set motd banner
   template:
     src: "motd.j2"
     dest: "/etc/motd"
     mode: 0700
-  tags: [ husky, common ]
+  tags: [ ubbe, common ]
