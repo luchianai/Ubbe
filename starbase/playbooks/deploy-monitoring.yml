@@ -12,7 +12,7 @@
     # Node exporter targets
     node_exporter_targets:
       - 'localhost:9100'
-      - '134.199.219.102:9100'
+      - 'luchian.io:9100'
 
     # Remote write configuration
     prometheus_remote_write_urls:

@@ -23,6 +23,9 @@ ansible all -m ping
 
 # Deploy monitoring stack
 ansible-playbook -i inventory/hosts playbooks/deploy-monitoring.yml
+
+# Deploy Node
+ansible-playbook playbooks/deploy-node.yml
 ```
 
 ## What Gets Deployed
