@@ -1,0 +1,18 @@
+[Unit]
+Description=Alloy
+Documentation=https://github.com/grafana/alloy
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=alloy
+Group=alloy
+Type=simple
+Restart=on-failure
+Environment="REMOTE_PROMETHEUS_WRITE_URL={{ remote_prometheus_write_url }}"
+Environment="REMOTE_PROMETHEUS_USERNAME={{ remote_prometheus_username }}"
+Environment="REMOTE_PROMETHEUS_PASSWORD={{ remote_prometheus_password }}"
+ExecStart=/opt/alloy/agent run --storage.path=/var/lib/alloy /opt/alloy/config.alloy
+
+[Install]
+WantedBy=multi-user.target

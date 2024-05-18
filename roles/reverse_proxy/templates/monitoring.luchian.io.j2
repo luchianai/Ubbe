@@ -28,8 +28,10 @@ server {
     listen [::]:80;
     server_name {{ prometheus_hostname }}.{{ hostname }};
 
+    {% if enable_prometheus_auth %}
     auth_basic           "Administrator Area";
     auth_basic_user_file /etc/nginx/.htpasswd;
+    {% endif %}
 
     location / {
         proxy_set_header Host $http_host;
@@ -42,8 +44,10 @@ server {
     listen [::]:80;
     server_name {{ alertmanager_hostname }}.{{ hostname }};
 
+    {% if enable_alertmanager_auth %}
     auth_basic           "Administrator Area";
     auth_basic_user_file /etc/nginx/.htpasswd;
+    {% endif %}
 
     location / {
         proxy_set_header Host $http_host;
@@ -56,8 +60,10 @@ server {
     listen [::]:80;
     server_name {{ node_exporter_hostname }}.{{ hostname }};
 
+    {% if enable_node_exporter_auth %}
     auth_basic           "Administrator Area";
     auth_basic_user_file /etc/nginx/.htpasswd;
+    {% endif %}
 
     location / {
         proxy_set_header Host $http_host;

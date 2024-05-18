@@ -19,19 +19,14 @@
       - nginx
       - iptables-persistent
       - apache2-utils
-      - python3-pip
+      - python3-passlib
     state: present
-  tags: [ ubbe, reverse_proxy ]
-
-- name: Install passlib python package
-  pip:
-    name: passlib
   tags: [ ubbe, reverse_proxy ]
 
 - name: Create the nginx configuration file
   template:
-    src: husky.sh.j2
-    dest: /etc/nginx/sites-available/husky.sh
+    src: monitoring.luchian.io.j2
+    dest: /etc/nginx/sites-available/monitoring.luchian.io
     backup: yes
     mode: '0644'
   notify: reload nginx
@@ -55,7 +50,7 @@
   notify: restart nginx
   tags: [ ubbe, reverse_proxy ]
 
-- name: Ensure that husky site is enabled
+- name: Ensure that monitoring site is enabled
   file:
     src: /etc/nginx/sites-available/monitoring.luchian.io
     dest: /etc/nginx/sites-enabled/monitoring.luchian.io

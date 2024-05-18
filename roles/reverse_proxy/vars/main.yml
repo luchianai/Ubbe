@@ -18,6 +18,11 @@ hostname: monitoring.luchian.io
 http_basic_auth_username: admin
 http_basic_auth_password: admin
 
+# Authentication settings for each service
+enable_prometheus_auth: true
+enable_alertmanager_auth: true
+enable_node_exporter_auth: true
+
 grafana_hostname: grafana
 prometheus_hostname: prometheus
 alertmanager_hostname: alertmanager

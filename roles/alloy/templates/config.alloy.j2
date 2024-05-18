@@ -1,0 +1,25 @@
+
+// Remote Prometheus Server
+prometheus.remote_write "remote_prometheus" {
+  endpoint {
+    url = env("REMOTE_PROMETHEUS_WRITE_URL")
+
+    basic_auth {
+      username = env("REMOTE_PROMETHEUS_USERNAME")
+      password = env("REMOTE_PROMETHEUS_PASSWORD")
+    }
+  }
+}
+
+prometheus.exporter.self "alloy" {}
+prometheus.scrape "alloy" {
+  targets    = prometheus.exporter.self.alloy.targets
+  forward_to = [prometheus.remote_write.remote_prometheus.receiver]
+}
+
+
+prometheus.exporter.unix "node" { }
+prometheus.scrape "node" {
+  targets    = prometheus.exporter.unix.node.targets
+  forward_to = [prometheus.remote_write.remote_prometheus.receiver]
+}

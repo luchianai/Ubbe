@@ -1,0 +1,26 @@
+---
+- name: Deploy Monitoring Stack
+  hosts: monitoring
+  become: yes
+  gather_facts: yes
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+
+  roles:
+    - role: ../roles/common
+    - role: ../roles/node_exporter
+    - role: ../roles/prometheus
+    - role: ../roles/alertmanager
+    - role: ../roles/grafana
+    - role: ../roles/reverse_proxy
+
+  post_tasks:
+    - name: Display monitoring stack status
+      debug:
+        msg: |
+          Monitoring stack deployment completed!
