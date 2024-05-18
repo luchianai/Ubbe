@@ -11,10 +11,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
----
-alertmanager_version: 0.24.0
-alertmanager_version_checksum: 6fa982232ae7be5524f5b3cd4e90b7c6a75086368200c917644eaa3e806555dc
-
-service_name: luchian
-service_key: xxxx-xxxx-xxxx-xxxx

@@ -13,6 +13,15 @@
 # limitations under the License.
 
 ---
-# Variables moved to defaults/main.yml for override capability
-# grafana_version: 9.1.0
-# grafana_version_checksum: ce245ae4bd882387e01afabc365c08c8ddb507b7156442ae7f7f9ef104d95cb0
+# Prometheus version and checksum (can be overridden by group vars)
+prometheus_version: 2.38.0
+prometheus_version_checksum: 43ddb515e1f3c28566aed0eba296bae136064e164ef0245986cfa9c497b839ce
+
+# Node exporter targets (can be overridden by group vars)
+node_exporter_targets: ['localhost:9100']
+
+# Remote write configuration
+prometheus_remote_write_urls:
+  - url: "http://localhost:9090/api/v1/write"
+    username: "admin"
+    password: "admin"

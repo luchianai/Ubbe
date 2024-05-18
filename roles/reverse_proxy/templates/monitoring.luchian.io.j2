@@ -28,12 +28,19 @@ server {
     listen [::]:80;
     server_name {{ prometheus_hostname }}.{{ hostname }};
 
-    {% if enable_prometheus_auth %}
-    auth_basic           "Administrator Area";
-    auth_basic_user_file /etc/nginx/.htpasswd;
-    {% endif %}
-
+    # Main Prometheus interface (configurable protection)
     location / {
+        {% if enable_prometheus_auth %}
+        auth_basic           "Administrator Area";
+        auth_basic_user_file /etc/nginx/.htpasswd;
+        {% endif %}
+        proxy_set_header Host $http_host;
+        proxy_pass http://127.0.0.1:9090;
+    }
+
+    # Remote write endpoint (configurable protection)
+    location /api/v1/write {
+        auth_basic off;
         proxy_set_header Host $http_host;
         proxy_pass http://127.0.0.1:9090;
     }

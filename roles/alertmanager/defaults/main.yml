@@ -13,6 +13,10 @@
 # limitations under the License.
 
 ---
-# Variables moved to defaults/main.yml for override capability
-# grafana_version: 9.1.0
-# grafana_version_checksum: ce245ae4bd882387e01afabc365c08c8ddb507b7156442ae7f7f9ef104d95cb0
+# Alertmanager version and checksum (can be overridden by group vars)
+alertmanager_version: 0.24.0
+alertmanager_version_checksum: 6fa982232ae7be5524f5b3cd4e90b7c6a75086368200c917644eaa3e806555dc
+
+# PagerDuty configuration (can be overridden by group vars)
+service_name: luchian
+service_key: xxxx-xxxx-xxxx-xxxx

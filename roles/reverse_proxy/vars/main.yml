@@ -11,33 +11,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
----
-hostname: monitoring.luchian.io
-
-http_basic_auth_username: admin
-http_basic_auth_password: admin
-
-# Authentication settings for each service
-enable_prometheus_auth: true
-enable_alertmanager_auth: true
-enable_node_exporter_auth: true
-
-grafana_hostname: grafana
-prometheus_hostname: prometheus
-alertmanager_hostname: alertmanager
-node_exporter_hostname: node_exporter
-
-nginx_logrotate_scripts:
-  - name: nginx
-    log_dir: '/var/log/nginx'
-    log_extension: 'log'
-    options:
-      - rotate 7
-      - daily
-      - size 10M
-      - missingok
-      - compress
-      - create 0644 root www-data
-    scripts:
-        postrotate: "/bin/kill -USR1 `cat /run/nginx.pid 2>/dev/null` 2>/dev/null || true"

@@ -16,6 +16,19 @@ global:
   scrape_interval: 15s
   evaluation_interval: 15s
 
+# Remote write configuration
+remote_write:
+{% if prometheus_remote_write_urls is defined %}
+{% for remote_write_url in prometheus_remote_write_urls %}
+  - url: "{{ remote_write_url.url }}"
+    {% if remote_write_url.username is defined %}
+    basic_auth:
+      username: "{{ remote_write_url.username }}"
+      password: "{{ remote_write_url.password }}"
+    {% endif %}
+{% endfor %}
+{% endif %}
+
 alerting:
   alertmanagers:
     - static_configs:
