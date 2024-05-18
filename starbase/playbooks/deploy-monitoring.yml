@@ -32,9 +32,6 @@
         username: "admin"
         password: "password"
 
-    # Prometheus feature flags
-    prometheus_enable_remote_write_receiver: true
-
     # PagerDuty configuration
     service_name: "luchian"
     service_key: "dc81eb90081f430cd0e1e95a48b980a3"
