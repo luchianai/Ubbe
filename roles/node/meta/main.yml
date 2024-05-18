@@ -15,12 +15,8 @@
 ---
 galaxy_info:
   author: clivern
-  description: Installs Grafana Alloy
+  description: Installs Node Exporter
   company: luchian
-
-  # If the issue tracker for your role is not on github, uncomment the
-  # next line and provide a value
-  # issue_tracker_url: http://example.com/issue/tracker
 
   # Choose a valid license ID from https://spdx.org - some suggested licenses:
   # - BSD-3-Clause (default)
@@ -29,7 +25,7 @@ galaxy_info:
   # - GPL-3.0-only
   # - Apache-2.0
   # - CC-BY-4.0
-  license: MIT
+  license: Apache-2.0
 
   min_ansible_version: 2.1
 
@@ -43,9 +39,9 @@ galaxy_info:
   # https://galaxy.ansible.com/api/v1/platforms/
   #
   platforms:
-    - name: Ubuntu
-      versions:
-        - 24.04
+  - name: Ubuntu
+    versions:
+      - 24.04
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes

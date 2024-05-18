@@ -16,3 +16,6 @@
 # Node Exporter version and checksum (can be overridden by group vars)
 node_exporter_version: 1.9.1
 node_exporter_version_checksum: becb950ee80daa8ae7331d77966d94a611af79ad0d3307380907e0ec08f5b4e8
+
+system_user: ubbe
+system_group: ubbe

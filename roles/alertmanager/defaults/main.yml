@@ -14,8 +14,8 @@
 
 ---
 # Alertmanager version and checksum (can be overridden by group vars)
-alertmanager_version: 0.24.0
-alertmanager_version_checksum: 6fa982232ae7be5524f5b3cd4e90b7c6a75086368200c917644eaa3e806555dc
+alertmanager_version: 0.28.1
+alertmanager_version_checksum: 5ac7ab5e4b8ee5ce4d8fb0988f9cb275efcc3f181b4b408179fafee121693311
 
 # PagerDuty configuration (can be overridden by group vars)
 service_name: luchian

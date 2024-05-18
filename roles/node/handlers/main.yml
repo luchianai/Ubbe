@@ -13,10 +13,14 @@
 # limitations under the License.
 
 ---
-alloy_version: 1.5.1
+- name: restart node_exporter
+  service:
+    name: node_exporter
+    state: restarted
+    enabled: yes
 
-remote_prometheus_write_url: http://X.X.X.X:9090/api/v1/write
-remote_prometheus_username: admin
-remote_prometheus_password: password
-
-alloy_hostname: luchian01_host
+- name: reload node_exporter
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: node_exporter

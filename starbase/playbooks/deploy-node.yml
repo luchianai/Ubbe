@@ -1,0 +1,26 @@
+---
+- name: Deploy Node Exporter
+  hosts: hosts
+  become: yes
+  gather_facts: yes
+
+  vars:
+    # System configuration
+    system_user: ubbe
+    system_group: ubbe
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+
+  roles:
+    - role: ../roles/node
+
+  post_tasks:
+    - name: Display node exporter deployment status
+      debug:
+        msg: |
+          Node exporter deployment completed!

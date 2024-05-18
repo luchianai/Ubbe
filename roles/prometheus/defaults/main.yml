@@ -14,8 +14,8 @@
 
 ---
 # Prometheus version and checksum (can be overridden by group vars)
-prometheus_version: 2.38.0
-prometheus_version_checksum: 43ddb515e1f3c28566aed0eba296bae136064e164ef0245986cfa9c497b839ce
+prometheus_version: 3.5.0
+prometheus_version_checksum: e811827af26d822afb09a4f28314f61b618b12cff5369835a67f674d8b46f39a
 
 # Node exporter targets (can be overridden by group vars)
 node_exporter_targets: ['localhost:9100']
