@@ -6,8 +6,28 @@
 
   vars:
     # System configuration
-    system_user: ubbe
-    system_group: ubbe
+    common_system_user: ubbe
+    common_system_group: ubbe
+
+    # Grafana configuration
+    grafana_system_user: ubbe
+    grafana_system_group: ubbe
+
+    # Node exporter configuration
+    node_system_user: ubbe
+    node_system_group: ubbe
+
+    # Node exporter configuration
+    node_exporter_system_user: ubbe
+    node_exporter_system_group: ubbe
+
+    # Prometheus configuration
+    prometheus_system_user: ubbe
+    prometheus_system_group: ubbe
+
+    # Alertmanager configuration
+    alertmanager_system_user: ubbe
+    alertmanager_system_group: ubbe
 
     # Node exporter targets
     node_exporter_targets:

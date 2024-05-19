@@ -6,8 +6,8 @@
 
   vars:
     # System configuration
-    system_user: ubbe
-    system_group: ubbe
+    node_system_user: ubbe
+    node_system_group: ubbe
 
   pre_tasks:
     - name: Update apt cache
