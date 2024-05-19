@@ -3,8 +3,8 @@ Description=Node Exporter
 After=network.target
 
 [Service]
-User={{ node_exporter_system_user }}
-Group={{ node_exporter_system_group }}
+User={{ node_system_user }}
+Group={{ node_system_group }}
 Type=simple
 RestartSec=5s
 Restart=on-failure
