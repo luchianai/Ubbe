@@ -3,8 +3,8 @@ Description=Prometheus Server
 After=network.target
 
 [Service]
-User={{ system_user }}
-Group={{ system_group }}
+User={{ prometheus_system_user }}
+Group={{ prometheus_system_group }}
 Type=simple
 RestartSec=5s
 Restart=on-failure

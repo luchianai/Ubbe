@@ -18,7 +18,7 @@ receivers:
     name: pagerduty
     pagerduty_configs:
       -
-        service_key: {{ service_key }}
+        service_key: {{ alertmanager_service_key }}
         send_resolved: true
 
 route:
@@ -31,5 +31,5 @@ route:
   routes:
     -
       matchers:
-        - service="{{ service_name }}"
+        - service="{{ alertmanager_service_name }}"
       receiver: pagerduty

@@ -63,8 +63,8 @@
   ansible.builtin.file:
     path: /etc/prometheus/data
     state: directory
-    owner: "{{ system_user }}"
-    group: "{{ system_group }}"
+    owner: "{{ prometheus_system_user }}"
+    group: "{{ prometheus_system_group }}"
     mode: "0755"
   tags: [ubbe, prometheus]
 
@@ -75,7 +75,7 @@
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: "0644"
-  notify: restart prometheus
+  notify: Restart prometheus
   tags: [ubbe, prometheus]
 
 - name: Create prometheus alert rules file /etc/prometheus/alert_rules.yml
@@ -85,7 +85,7 @@
     owner: "{{ prometheus_system_user }}"
     group: "{{ prometheus_system_group }}"
     mode: "0644"
-  notify: restart prometheus
+  notify: Restart prometheus
   tags: [ubbe, prometheus]
 
 - name: Copy prometheus systemd file prometheus.service into /etc/systemd/system
@@ -95,7 +95,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: reload prometheus
+  notify: Reload prometheus
   tags: [ubbe, prometheus]
 
 - name: Start prometheus service

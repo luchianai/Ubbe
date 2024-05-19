@@ -83,7 +83,7 @@
     regexp: "^PasswordAuthentication"
     line: "PasswordAuthentication no"
     state: present
-  notify: restart sshd
+  notify: Restart sshd
   tags: [ubbe, common]
 
 - name: Activate firewall

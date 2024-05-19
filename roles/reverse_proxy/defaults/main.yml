@@ -23,10 +23,10 @@ reverse_proxy_http_basic_auth_username: admin
 reverse_proxy_http_basic_auth_password: admin
 
 # Default hostnames
-reverse_proxy_grafana_hostname: grafana
-reverse_proxy_prometheus_hostname: prometheus
-reverse_proxy_alertmanager_hostname: alertmanager
-reverse_proxy_node_exporter_hostname: node_exporter
+reverse_proxy_grafana_hostname: grafana.monitoring.luchian.io
+reverse_proxy_prometheus_hostname: prometheus.monitoring.luchian.io
+reverse_proxy_alertmanager_hostname: alertmanager.monitoring.luchian.io
+reverse_proxy_node_exporter_hostname: node-exporter.monitoring.luchian.io
 
 # Default domain
 reverse_proxy_hostname: monitoring.luchian.io

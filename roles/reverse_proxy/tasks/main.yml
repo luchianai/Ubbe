@@ -29,14 +29,14 @@
     dest: /etc/nginx/sites-available/monitoring.luchian.io
     backup: true
     mode: "0644"
-  notify: reload nginx
+  notify: Reload nginx
   tags: [ubbe, reverse_proxy]
 
 - name: Ensure that the default site is disabled
   ansible.builtin.file:
     path: /etc/nginx/sites-enabled/default
     state: absent
-  notify: reload nginx
+  notify: Reload nginx
   tags: [ubbe, reverse_proxy]
 
 - name: Enable basic authentication
@@ -47,7 +47,7 @@
     owner: root
     group: www-data
     mode: "0640"
-  notify: restart nginx
+  notify: Restart nginx
   tags: [ubbe, reverse_proxy]
 
 - name: Ensure that monitoring site is enabled
@@ -55,7 +55,7 @@
     src: /etc/nginx/sites-available/monitoring.luchian.io
     dest: /etc/nginx/sites-enabled/monitoring.luchian.io
     state: link
-  notify: reload nginx
+  notify: Reload nginx
   tags: [ubbe, reverse_proxy]
 
 - name: Ensure nginx service is started

@@ -54,11 +54,11 @@
     enable_node_exporter_auth: true
 
     # Domain configuration
-    monitoring_domain: "monitoring.luchian.io"
-    grafana_hostname: "grafana"
-    prometheus_hostname: "prometheus"
-    alertmanager_hostname: "alertmanager"
-    node_exporter_hostname: "node-exporter"
+    grafana_hostname: "grafana.monitoring.luchian.io"
+    reverse_proxy_grafana_hostname: "grafana.monitoring.luchian.io"
+    reverse_proxy_prometheus_hostname: "prometheus.monitoring.luchian.io"
+    reverse_proxy_alertmanager_hostname: "alertmanager.monitoring.luchian.io"
+    reverse_proxy_node_exporter_hostname: "node-exporter.monitoring.luchian.io"
 
   pre_tasks:
     - name: Update apt cache

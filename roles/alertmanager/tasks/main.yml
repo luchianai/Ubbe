@@ -75,7 +75,7 @@
     owner: "{{ alertmanager_system_user }}"
     group: "{{ alertmanager_system_group }}"
     mode: "0644"
-  notify: restart alertmanager
+  notify: Restart alertmanager
   tags: [ubbe, alertmanager]
 
 - name: Copy alertmanager systemd file alertmanager.service into /etc/systemd/system
@@ -85,7 +85,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: reload alertmanager
+  notify: Reload alertmanager
   tags: [ubbe, alertmanager]
 
 - name: Start alertmanager service

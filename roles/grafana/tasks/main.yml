@@ -107,7 +107,7 @@
     owner: "{{ grafana_system_user }}"
     group: "{{ grafana_system_group }}"
     mode: "0644"
-  notify: restart grafana
+  notify: Restart grafana
   tags: [ubbe, grafana]
 
 - name: Copy grafana systemd file
@@ -117,7 +117,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: reload systemd
+  notify: Reload systemd
   tags: [ubbe, grafana]
 
 - name: Start grafana service

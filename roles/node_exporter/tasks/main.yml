@@ -57,7 +57,7 @@
     owner: root
     group: root
     mode: "0644"
-  notify: reload node_exporter
+  notify: Reload node_exporter
   tags: [ubbe, node_exporter]
 
 - name: Start node_exporter service

@@ -6,7 +6,7 @@ map $http_upgrade $connection_upgrade {
 server {
     listen 80;
     listen [::]:80;
-    server_name {{ grafana_hostname }}.{{ hostname }};
+    server_name {{ reverse_proxy_grafana_hostname }};
 
     location / {
         proxy_set_header Host $http_host;
@@ -26,7 +26,7 @@ server {
 server {
     listen 80;
     listen [::]:80;
-    server_name {{ prometheus_hostname }}.{{ hostname }};
+    server_name {{ reverse_proxy_prometheus_hostname }};
 
     # Main Prometheus interface (configurable protection)
     location / {
@@ -49,7 +49,7 @@ server {
 server {
     listen 80;
     listen [::]:80;
-    server_name {{ alertmanager_hostname }}.{{ hostname }};
+    server_name {{ reverse_proxy_alertmanager_hostname }};
 
     {% if enable_alertmanager_auth %}
     auth_basic           "Administrator Area";
@@ -65,7 +65,7 @@ server {
 server {
     listen 80;
     listen [::]:80;
-    server_name {{ node_exporter_hostname }}.{{ hostname }};
+    server_name {{ reverse_proxy_node_exporter_hostname }};
 
     {% if enable_node_exporter_auth %}
     auth_basic           "Administrator Area";

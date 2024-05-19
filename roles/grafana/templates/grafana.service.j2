@@ -5,8 +5,8 @@ Wants=network-online.target
 After=network-online.target
 
 [Service]
-User={{ system_user }}
-Group={{ system_group }}
+User={{ grafana_system_user }}
+Group={{ grafana_system_group }}
 RestartSec=5s
 Restart=on-failure
 Type=simple
