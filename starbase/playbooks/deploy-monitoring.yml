@@ -12,13 +12,14 @@
     # Node exporter targets
     node_exporter_targets:
       - 'localhost:9100'
-      - 'luchian.io:9100'
+      # Add this in /etc/hosts file to be the private IP of the platform server
+      - 'platform.luchian.io.local:9100'
 
     # Remote write configuration
     prometheus_remote_write_urls:
       - url: "http://localhost:9090/api/v1/write"
         username: "admin"
-        password: "password"
+        password: "dc81eb90081f430cwryeydgredfae"
 
     # PagerDuty configuration
     service_name: "luchian"
@@ -26,7 +27,7 @@
 
     # HTTP Basic Auth
     http_basic_auth_username: "admin"
-    http_basic_auth_password: "password"
+    http_basic_auth_password: "dc81eb90081f430coeiueue"
 
     # Authentication settings for each service
     enable_prometheus_auth: true
