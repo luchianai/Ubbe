@@ -49,9 +49,9 @@
     http_basic_auth_password: "dc81eb90081f430coeiueue"
 
     # Authentication settings for each service
-    enable_prometheus_auth: true
-    enable_alertmanager_auth: true
-    enable_node_exporter_auth: true
+    enable_prometheus_auth: false
+    enable_alertmanager_auth: false
+    enable_node_exporter_auth: false
 
     # Domain configuration
     grafana_hostname: "grafana.monitoring.luchian.io"

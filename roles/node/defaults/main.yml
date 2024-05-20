@@ -20,3 +20,6 @@ node_exporter_version_checksum: becb950ee80daa8ae7331d77966d94a611af79ad0d330738
 # System user and group for file ownership and service configuration
 node_system_user: ubbe
 node_system_group: ubbe
+
+# Node Exporter listen address (default to localhost for security)
+node_listen_address: "127.0.0.1:9100"

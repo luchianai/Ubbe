@@ -15,6 +15,24 @@
 groups:
 - name: ansible managed alert rules
   rules:
+  - alert: Monitoring Heartbeat
+    expr: count(up) > 0
+    for: 0m
+    labels:
+      severity: info
+    annotations:
+      summary: "{% raw %}Monitoring system is healthy{% endraw %}"
+      description: "{% raw %}Monitoring system is actively scraping {{ $value }} targets successfully.{% endraw %}"
+
+  - alert: Monitoring targets missing
+    expr: absent(up)
+    for: 1m
+    labels:
+      severity: critical
+    annotations:
+      summary: "{% raw %}Monitoring targets missing for {{ $labels.job }}{% endraw %}"
+      description: "{% raw %}No targets are being scraped for job {{ $labels.job }}. This indicates a monitoring system failure.{% endraw %}"
+
   - alert: Service is down
     expr: up == 0
     for: 1m
@@ -50,3 +68,30 @@ groups:
     annotations:
       summary: "{% raw %}Disk space filling up on {{ $labels.instance }}{% endraw %}"
       description: "{% raw %}Disk usage is above 80% for 5 minutes{% endraw %}"
+
+  - alert: Prometheus target scrape failures
+    expr: increase(prometheus_target_scrape_pool_targets_failed_total[5m]) > 0
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      summary: "{% raw %}Prometheus target scrape failures on {{ $labels.instance }}{% endraw %}"
+      description: "{% raw %}Prometheus is experiencing target scrape failures. Check target availability and network connectivity.{% endraw %}"
+
+  - alert: Prometheus high memory usage
+    expr: (process_resident_memory_bytes / 1024 / 1024) > 1024
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: "{% raw %}Prometheus high memory usage on {{ $labels.instance }}{% endraw %}"
+      description: "{% raw %}Prometheus is using more than 1GB of memory. Consider tuning retention or adding more memory.{% endraw %}"
+
+  - alert: Node Exporter metrics stale
+    expr: time() - node_boot_time_seconds > 86400
+    for: 1h
+    labels:
+      severity: warning
+    annotations:
+      summary: "{% raw %}Node Exporter metrics may be stale on {{ $labels.instance }}{% endraw %}"
+      description: "{% raw %}Node Exporter metrics haven't been updated recently. Check if the service is running properly.{% endraw %}"

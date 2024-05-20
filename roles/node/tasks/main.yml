@@ -92,7 +92,7 @@
 
 - name: Check if node_exporter is accessible
   ansible.builtin.uri:
-    url: http://localhost:9100
+    url: http://{{ node_listen_address }}
     method: GET
     status_code: 200
   tags: [ubbe, node]

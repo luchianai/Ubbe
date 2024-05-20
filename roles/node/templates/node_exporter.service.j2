@@ -8,7 +8,7 @@ Group={{ node_system_group }}
 Type=simple
 RestartSec=5s
 Restart=on-failure
-ExecStart=/usr/local/bin/node_exporter --web.listen-address=0.0.0.0:9100
+ExecStart=/usr/local/bin/node_exporter --web.listen-address={{ node_listen_address }}
 
 [Install]
 WantedBy=multi-user.target

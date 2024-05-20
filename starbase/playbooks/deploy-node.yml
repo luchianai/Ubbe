@@ -8,6 +8,8 @@
     # System configuration
     node_system_user: ubbe
     node_system_group: ubbe
+    # Update to the VPS private IP address
+    node_listen_address: "10.133.0.7:9100"
 
   pre_tasks:
     - name: Update apt cache
