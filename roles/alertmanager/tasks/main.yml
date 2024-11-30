@@ -36,7 +36,7 @@
     group: "{{ alertmanager_system_group }}"
     remote_src: true
     mode: "0755"
-  tags: [ubbe, prometheus]
+  tags: [ubbe, alertmanager]
 
 - name: Delete downloaded alertmanager directory
   ansible.builtin.file:

@@ -1,5 +1,5 @@
 [monitoring]
-node1 ansible_host=128.199.32.104 ansible_user=root ansible_ssh_private_key_file=~/.ssh/clivern_id_rsa.pub
+node1 ansible_host=127.0.0,1 ansible_user=root ansible_ssh_private_key_file=~/.ssh/clivern_id_rsa.pub
 
 [hosts]
-host1 ansible_host=209.38.97.52 ansible_user=root ansible_ssh_private_key_file=~/.ssh/clivern_id_rsa.pub
+host1 ansible_host=127.0.0.2 ansible_user=root ansible_ssh_private_key_file=~/.ssh/clivern_id_rsa.pub

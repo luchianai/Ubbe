@@ -38,15 +38,15 @@
     prometheus_remote_write_urls:
       - url: "http://localhost:9090/api/v1/write"
         username: "admin"
-        password: "dc81eb90081f430cwryeydgredfae"
+        password: "add your password here"
 
     # PagerDuty configuration
     alertmanager_service_name: "luchian"
-    alertmanager_service_key: "dc81eb90081f430cd0e1e95a48b980a3"
+    alertmanager_service_key: "add your service key here"
 
     # HTTP Basic Auth
     http_basic_auth_username: "admin"
-    http_basic_auth_password: "dc81eb90081f430coeiueue"
+    http_basic_auth_password: "add your password here"
 
     # Authentication settings for each service
     enable_prometheus_auth: false
